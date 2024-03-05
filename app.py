@@ -92,11 +92,13 @@
 
 
 import streamlit as st
-import pickle
+import joblib
 
 # Load the pre-trained classifier model
-with open('classifier.pkl', 'rb') as model_file:
-    classifier = pickle.load(model_file)
+classifier = joblib.load('classifier.pkl')
+
+# Now you can use the loaded classifier object in your Streamlit app
+
 
 # Function to predict if currency note is fake or not
 def predict_note_authentication(variance, skewness, curtosis, entropy):
@@ -111,7 +113,7 @@ st.markdown(
     """
     <style>
     .header {
-        background-color: olive;
+        background-color: Red;
         color: white;
         padding: 10px;
         font-size: 24px;
@@ -122,7 +124,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown('<p class="header">Samrat Consultancy</p>', unsafe_allow_html=True)
+st.markdown('<p class="header">Currency Detector App</p>', unsafe_allow_html=True)
 
 st.sidebar.title('Input Features')
 variance = st.sidebar.number_input('Variance', value=0.0)
